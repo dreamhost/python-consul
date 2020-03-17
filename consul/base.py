@@ -1463,7 +1463,11 @@ class Consul(object):
             if dc:
                 params.append(('dc', dc))
             if tag:
-                params.append(('tag', tag))
+                tags = tag
+                if not isinstance(tag, list):
+                    tags = [tag]
+                for t in tags:
+                    params.append(('tag', t))
             if index:
                 params.append(('index', index))
                 if wait:
